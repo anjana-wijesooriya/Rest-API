@@ -21,7 +21,7 @@ restapi.get('/data', function (request, response) {
 });
 
 restapi.get('/', function (request, response) {
-    db.all("SELECT * FROM counts", function (error, rows) {
+    db.all("SELECT * FROM employees", function (error, rows) {
         return response.json(rows);
     });
 });
