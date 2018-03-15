@@ -26,6 +26,12 @@ restapi.get('/', function (request, response) {
     });
 });
 
+restapi.get('/getEducationData', function (request, response) {
+    db.all("SELECT * FROM education", function (error, rows) {
+        return response.json(rows);
+    })
+})
+
 restapi.listen(port, function () {
     console.log('Our app is running on http://localhost:' + port);
 });
