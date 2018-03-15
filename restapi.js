@@ -1,4 +1,5 @@
 var sqlite3 = require('sqlite3').verbose();
+var port = process.env.PORT || 8080;
 var db = new sqlite3.Database('db/chinook.db');
 
 db.serialize(function () {
@@ -8,6 +9,10 @@ db.serialize(function () {
 
 var express = require('express');
 var restapi = express();
+
+
+restapi.use(express.static(__dirname + '/public'));
+
 
 restapi.get('/data', function (request, response) {
     db.all("SELECT * FROM counts", function (error, rows) {
@@ -21,5 +26,6 @@ restapi.get('/', function (request, response) {
     });
 });
 
-restapi.listen(8080);
-
+restapi.listen(port, function () {
+    console.log('Our app is running on http://localhost:' + port);
+});
