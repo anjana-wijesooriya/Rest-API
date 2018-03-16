@@ -13,27 +13,26 @@ var restapi = express();
 
 restapi.use(express.static(__dirname + '/public'));
 
-// restapi.all("/*", function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization,   Content-Type, X-Requested-With");
-//     res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-//     return next();
-// });
+restapi.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 
-restapi.get('/data', function (request, response) {
+restapi.get('/data', function (request, response, next) {
     db.all("SELECT * FROM counts", function (error, rows) {
         return response.json(rows);
     });
 });
 
-restapi.get('/', function (request, response) {
+restapi.get('/', function (request, response, next) {
     db.all("SELECT * FROM employees", function (error, rows) {
         return response.json(rows);
     });
 });
 
-restapi.get('/getEducationData', function (request, response) {
+restapi.get('/getEducationData', function (request, response, next) {
     db.all("SELECT * FROM education", function (error, rows) {
         return response.json(rows);
     })
