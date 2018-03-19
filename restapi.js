@@ -9,6 +9,7 @@ db.serialize(function () {
 
 var express = require('express');
 var restapi = express();
+var educationDao = require('./dao/EducationDao.js');
 
 
 restapi.use(express.static(__dirname + '/public'));
@@ -37,6 +38,8 @@ restapi.get('/getEducationData', function (request, response, next) {
         return response.json(rows);
     })
 })
+
+restapi.use("/education", educationDao);
 
 restapi.listen(port, function () {
     console.log('Our app is running on http://localhost:' + port);
