@@ -10,6 +10,7 @@ db.serialize(function () {
 var express = require('express');
 var restapi = express();
 var educationDao = require('./dao/EducationDao.js');
+var dashboardDao = require('./dao/DashboardDao.js');
 
 
 restapi.use(express.static(__dirname + '/public'));
@@ -39,7 +40,10 @@ restapi.get('/getEducationData', function (request, response, next) {
     })
 })
 
+
 restapi.use("/education", educationDao);
+restapi.use("/dashboard", dashboardDao);
+
 
 restapi.listen(port, function () {
     console.log('Our app is running on http://localhost:' + port);
