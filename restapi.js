@@ -21,25 +21,11 @@ restapi.use(function (request, response, next) {
   next();
 });
 
-
-restapi.get('/data', function (request, response, next) {
-    db.all("SELECT * FROM counts", function (error, rows) {
-        return response.json(rows);
-    });
-});
-
 restapi.get('/', function (request, response, next) {
     db.all("SELECT * FROM employees", function (error, rows) {
         return response.json(rows);
     });
 });
-
-restapi.get('/getEducationData', function (request, response, next) {
-    db.all("SELECT * FROM education", function (error, rows) {
-        return response.json(rows);
-    })
-})
-
 
 restapi.use("/education", educationDao);
 restapi.use("/dashboard", dashboardDao);
