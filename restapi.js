@@ -11,6 +11,7 @@ var express = require('express');
 var restapi = express();
 var educationDao = require('./dao/EducationDao.js');
 var dashboardDao = require('./dao/DashboardDao.js');
+var skillsDao = require('./dao/SkillsDao.js');
 
 
 restapi.use(express.static(__dirname + '/public'));
@@ -29,6 +30,7 @@ restapi.get('/', function (request, response, next) {
 
 restapi.use("/education", educationDao);
 restapi.use("/dashboard", dashboardDao);
+restapi.use("/skill", skillsDao);
 
 
 restapi.listen(port, function () {
