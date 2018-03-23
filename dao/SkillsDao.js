@@ -5,10 +5,15 @@ var db = new sqlite3.Database('db/chinook.db');
 
 
 router.get('/getSkills', function (request, response, next) {
-    var script = 'SELECT A.[Id], A.[SkillName], A.[Value], A.[Color], B.[Id] AS "StackId", B.[Stack] FROM [Skills] A INNER JOIN [SkillType] B ON A.[SkillTypeId] = B.[Id]';
-    return db.all(script, function (error, rows) {
-        return response.json(rows);
-    });
+    try {
+        var script = 'SELECT A.[Id], A.[SkillName], A.[Value], A.[Color], B.[Id] AS "StackId", B.[Stack] FROM [Skills] A INNER JOIN [SkillType] B ON A.[SkillTypeId] = B.[Id]';
+        return db.all(script, function (error, rows) {
+            if (error != null) console.log(error);
+            return response.json(rows);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 module.exports = router;
