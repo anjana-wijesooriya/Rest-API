@@ -8,11 +8,11 @@ router.get('/getSkills', function (request, response, next) {
     try {
         var script = 'SELECT A.[Id], A.[SkillName], A.[Value], A.[Color], B.[Id] AS "StackId", B.[Stack] FROM [Skills] A INNER JOIN [SkillType] B ON A.[SkillTypeId] = B.[Id]';
         return db.all(script, function (error, rows) {
-            if (error != null) console.log(error);
+            if (error != null) response.status(500).send({ error: error.message });
             return response.json(rows);
         });
     } catch (error) {
-        console.log(error);
+        if (error != null) response.status(500).send({ error: error.message });
     }
 });
 

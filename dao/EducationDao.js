@@ -6,11 +6,11 @@ var db = new sqlite3.Database('db/chinook.db');
 router.get('/get', function (request, response, next) {
     try {
         db.all("SELECT * FROM education", function (error, rows) {
-            if (error != null) console.log(error);
+            if (error != null) response.status(500).send({ error: error.message });
             return response.json(rows);
         });
     } catch (error) {
-        console.log(error);
+        if (error != null) response.status(500).send({ error: error.message });
     };
 });
 
