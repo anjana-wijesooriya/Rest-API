@@ -33,7 +33,7 @@ router.get('/getResponsibilitiesByCareer/:careerid', function (request, response
 
 router.get('/getResponsibilities', function (request, response, next) {
     try {
-        var script = 'SELECT A.[Id], A.[Description] FROM [Responsibility] A INNER JOIN [Career_Responsibility] B ON A.[Id] = B.[ResponsibilityId]'
+        var script = 'SELECT A.[Id], A.[Description], B.[CareerId] FROM [Responsibility] A INNER JOIN [Career_Responsibility] B ON A.[Id] = B.[ResponsibilityId]'
         return db.all(script, function (error, rows) {
             if (error != null) response.status(500).send({ error: error.message });
             return response.json(rows);
@@ -58,7 +58,7 @@ router.get('/getSkillsByCareer/:careerid', function (request, response, next) {
 
 router.get('/getSkills', function (request, response, next) {
     try {
-        var script = 'SELECT A.[Id], A.[SkillName], A.[Color] FROM [Skills] A INNER JOIN [Career_Skills] B ON A.[id] = B.[SkillsId]';
+        var script = 'SELECT A.[Id], A.[SkillName], A.[Color], B.[CareerId] FROM [Skills] A INNER JOIN [Career_Skills] B ON A.[id] = B.[SkillsId]';
 
         return db.all(script ,function (error, rows) {
             if (error != null) response.status(500).send({ error: error.message });
