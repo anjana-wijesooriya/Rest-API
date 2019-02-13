@@ -9,7 +9,7 @@ npm install
 
 to run it type.
 
-node sql.js.
+node restapi.js.
 
 Tutorial link :  http://codeforgeek.com/2014/07/node-sqlite-tutorial/
 
